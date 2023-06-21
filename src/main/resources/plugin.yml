@@ -1,0 +1,8 @@
+name: NoCombinations
+version: '1.0'
+main: io.example.nocombinations.Main
+api-version: 1.13
+
+commands:
+  noCombinations:
+    aliases: "조합금지"
