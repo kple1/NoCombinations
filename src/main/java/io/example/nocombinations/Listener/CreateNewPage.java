@@ -10,7 +10,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class CreateNewPage implements Listener {
-    private int page = 1; // Initial page value
+
+    private int page = 0;
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -21,13 +22,12 @@ public class CreateNewPage implements Listener {
         if (clickedItem != null && clickedItem.getType() == Material.ARROW && event.getRawSlot() == 53) {
             event.setCancelled(true);
 
-            Inventory newInventory = Bukkit.createInventory(null, 54, event.getView().getTitle() + " " + (page + 1) + "Page");
+            Inventory newInventory = Bukkit.createInventory(null, 54, (page + 1) + "Page");
             newInventory.setContents(inventory.getContents());
             player.openInventory(newInventory);
 
             player.sendMessage("새로운 인벤토리가 생성되었습니다!");
-
-            page++; // Increment the page variable
+            page++;
         }
     }
 }
