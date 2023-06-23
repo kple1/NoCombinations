@@ -19,10 +19,16 @@ public class NoCombinations implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
-            this.inv = Bukkit.createInventory(null, 54, "0Page");
+            int page = 0; // 초기 페이지를 0으로 설정
+            this.inv = Bukkit.createInventory(null, 54, "Page " + page);
+
             for (int i = 0; i < 53; i++) {
-                ItemStack item = plugin.getConfig().getItemStack("inventory." + i + ".item");
-                inv.setItem(i, item);
+                // Get item from config.yml
+                ItemStack storedItem = plugin.getConfig().getItemStack("inventory." + page + "." + i + ".item");
+                if (storedItem != null) {
+                    inv.setItem(i, storedItem);
+                }
+
                 ItemStack itemStack = new ItemStack(Material.ARROW);
                 inv.setItem(53, itemStack);
             }

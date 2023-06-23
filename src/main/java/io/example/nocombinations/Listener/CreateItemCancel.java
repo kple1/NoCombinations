@@ -16,15 +16,18 @@ public class CreateItemCancel implements Listener {
     public void ClickCancel(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         if (event.getInventory().getType() == InventoryType.WORKBENCH) {
-            for (int i = 0; i < 54; i++) {
-                ItemStack item = plugin.getConfig().getItemStack("inventory." + i + ".item");
-                if (item == null) {
-                    continue;
-                }
+            for (int i = 0; i <= 100; i++) {
+                for (int j = 0; j < 54; j++) {
+                    ItemStack item = plugin.getConfig().getItemStack("inventory." + i + "." + j + ".item");
+                    if (item == null) {
+                        continue;
+                    }
 
-                if (event.getCurrentItem().getType() == item.getType()) {  // 수정: item.getType()으로 비교
-                    player.sendMessage(Color.chat("&c&l[!] &f해당 아이템은 제작이 불가능합니다."));
-                    event.setCancelled(true);
+                    if (event.getCurrentItem() != null && event.getCurrentItem().getType() == item.getType()) {
+                        player.sendMessage(Color.chat("&c&l[!] &f해당 아이템은 제작이 불가능합니다."));
+                        event.setCancelled(true);
+                        return;
+                    }
                 }
             }
         }
